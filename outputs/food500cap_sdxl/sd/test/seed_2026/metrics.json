@@ -1,0 +1,125 @@
+{
+  "group": "sd",
+  "split": "test",
+  "seed": 2026,
+  "n": 4938,
+  "clipscore": 33.07095134552793,
+  "fid": 25.452554348730928,
+  "clip_details": {
+    "clipscore": 33.07095134552793,
+    "n": 4938,
+    "clip_model": {
+      "repo_id": "openai/clip-vit-base-patch32",
+      "requested_revision": "main",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+    },
+    "context_limit": 77,
+    "evaluator_truncated_count": 0,
+    "evaluator_truncated_sample_ids": [],
+    "formula": "mean(100 * max(0, cosine(normalized_image, normalized_text)))"
+  },
+  "fid_details": {
+    "fid": 25.452554348730928,
+    "n_real": 4938,
+    "n_generated": 4938,
+    "real_cache_key": "8414f0c35f417d456b30e05fb1f435d558433bebf3b9753e69be7fcb23372f10",
+    "mode": "clean",
+    "feature_model": "inception_v3"
+  },
+  "generation_signature_sha256": "fca7ae3db1890dc5bc3f8eab9f366f6eb41d2f2dfcddcb725a326433b8c5134d",
+  "protocol": {
+    "version": "food500cap-generation-v1",
+    "model": {
+      "repo_id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "requested_revision": "main",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+    },
+    "dataset_revision": "1b2e0cb098ef3d58584f80bde015207c5a3d00c7",
+    "split": "test",
+    "manifest_sha256": "698645f166448f58ae150af20bf9b9b759c2efd52349aea1b5358f3c78f0a8dd",
+    "sample_ids_sha256": "2a7c4b9b9776678c1eb5345df67691cf113990ce8932e9ba42a7e28652a09087",
+    "captions_sha256": "6672eb22207b92235b298fbdddee051d763db07024a3943deb7b396019654968",
+    "generation": {
+      "height": 1024,
+      "width": 1024,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "steps": 30,
+      "guidance_scale": 5.0,
+      "negative_prompt": "",
+      "lora_scale": 1.0
+    },
+    "text": {
+      "long_caption_mode": "chunk",
+      "max_chunks": 4
+    },
+    "encoding_version": "sdxl-full-caption-chunks-v1",
+    "runtime": {
+      "device": "cuda",
+      "precision": "auto",
+      "local_files_only": false,
+      "allow_tf32": false
+    },
+    "resolved_runtime": {
+      "precision": "bf16",
+      "device_type": "cuda",
+      "gpu_name": "NVIDIA A16",
+      "torch_cuda": "13.2"
+    },
+    "implementation_versions": {
+      "torch": "2.15.0",
+      "diffusers": "0.43.0",
+      "transformers": "5.23.0",
+      "peft": "0.22.0",
+      "Pillow": "13.0.0",
+      "numpy": "2.5.5"
+    },
+    "source_sha256": {
+      "data.py": "0f36f7d82667c658ab74ee534bf6f541be812981c90f74a02745d79a9b75d7d1",
+      "sd.py": "718e6434e8e9ea900b63edb0821c1ac4ce2f5601f9aef247c49aa21d60142d15"
+    }
+  },
+  "generation_manifest_sha256": "9301cd89bfcc73f6a323584145412d966df9f15d965deb4741ef41aefd7f5868",
+  "clipscore_per_sample_sha256": "34fb25b951108564aa0f08eed5d04b25a62a0833ac6d84f3afc9bf9367bcecb4",
+  "evaluation_protocol": {
+    "version": "food500cap-scoring-v1",
+    "clip_model": {
+      "repo_id": "openai/clip-vit-base-patch32",
+      "requested_revision": "main",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+    },
+    "settings": {
+      "clip_model": "openai/clip-vit-base-patch32",
+      "clip_revision": "main",
+      "clip_batch_size": 16,
+      "clip_long_caption_policy": "truncate_and_report",
+      "fid_mode": "clean",
+      "fid_feature_model": "inception_v3",
+      "fid_batch_size": 16,
+      "fid_num_workers": 0,
+      "comparison_samples": 8
+    },
+    "include_fid": true,
+    "manifest_sha256": "698645f166448f58ae150af20bf9b9b759c2efd52349aea1b5358f3c78f0a8dd",
+    "clip_formula": "mean(100 * max(0, cosine(normalized_image, normalized_text)))",
+    "fid_preprocessing": "exif-transpose-rgb-native-size-png-v1",
+    "implementation_versions": {
+      "torch": "2.15.0",
+      "torchvision": "0.29.2",
+      "transformers": "5.23.0",
+      "clean-fid": "0.1.35",
+      "Pillow": "13.0.0",
+      "numpy": "2.4.6",
+      "scipy": "1.15.3"
+    },
+    "source_sha256": {
+      "data.py": "0f36f7d82667c658ab74ee534bf6f541be812981c90f74a02745d79a9b75d7d1",
+      "sd.py": "aab360e6a3222a203e40815bbb887ed0dde1220b95f372801497819fe05d1820"
+    }
+  },
+  "evaluation_protocol_sha256": "2fef71852e60e72c0911445b355c84fbf4257c09689ee4b3756616e3b8d1fbbe",
+  "adapter": null,
+  "diagnostic_only": false
+}

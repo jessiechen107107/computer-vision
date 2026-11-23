@@ -1,0 +1,98 @@
+# Shared configuration for the two experimental groups.
+# All relative paths are resolved against this file, not the shell's directory.
+# These are initial settings, not hyperparameters selected from completed runs.
+
+experiment:
+  name: food500cap_sdxl
+  output_dir: outputs/food500cap_sdxl
+  train_seed: 42
+
+paths:
+  raw: data/raw/Food500Cap
+  processed: data/processed
+  reports: reports
+  cache: .cache/foodgen
+
+data:
+  repo_id: advancedcv/Food500Cap
+  revision: 1b2e0cb098ef3d58584f80bde015207c5a3d00c7
+  validation_fraction: 0.10
+  split_seed: 42
+  row_group_cache: 2
+
+model:
+  # This implementation deliberately targets SDXL's two-text-encoder architecture.
+  family: sdxl
+  id: stabilityai/stable-diffusion-xl-base-1.0
+  # On first use, a floating revision is resolved and saved as an immutable SHA.
+  # Subsequent commands reuse that SHA, including both experimental groups.
+  revision: main
+
+text:
+  # Every caption token is retained. Long captions are split into CLIP-sized
+  # chunks; both groups and the training loop use the same encoding function.
+  long_caption_mode: chunk
+  max_chunks: 4
+
+runtime:
+  device: cuda
+  # Use bf16 on supported CUDA cards, fp16 on other CUDA cards, fp32 on CPU.
+  precision: auto
+  local_files_only: false
+  allow_tf32: false
+
+train:
+  resolution: 1024
+  lora_rank: 8
+  lora_alpha: 8
+  target_modules: [to_q, to_k, to_v, to_out.0]
+  # A single caption per device avoids padding different-length chunked prompts
+  # to a batch-dependent context length. Increase the effective batch with
+  # gradient accumulation or additional GPUs instead.
+  batch_size_per_gpu: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0001
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_weight_decay: 0.01
+  adam_epsilon: 0.00000001
+  max_grad_norm: 1.0
+  max_train_steps: 5000
+  warmup_steps: 250
+  lr_scheduler: cosine
+  gradient_checkpointing: true
+  num_workers: 0
+  checkpoint_every_steps: 500
+  validate_every_steps: 1000
+  validation_samples: 512
+  validation_seed: 4242
+
+generation:
+  height: 1024
+  width: 1024
+  scheduler: DPMSolverMultistepScheduler
+  algorithm_type: dpmsolver++
+  solver_order: 2
+  use_karras_sigmas: true
+  steps: 30
+  guidance_scale: 5.0
+  # An empty negative prompt uses zero unconditional embeddings, following
+  # SDXL's force_zeros_for_empty_prompt convention.
+  negative_prompt: ""
+  lora_scale: 1.0
+  seeds: [2026]
+
+evaluation:
+  clip_model: openai/clip-vit-base-patch32
+  clip_revision: main
+  clip_batch_size: 16
+  # The standard CLIP evaluator has its own context window. Keep the canonical
+  # metric and report which evaluator inputs were truncated; do not silently
+  # substitute a different long-text similarity metric.
+  clip_long_caption_policy: truncate_and_report
+  fid_mode: clean
+  fid_feature_model: inception_v3
+  fid_batch_size: 16
+  fid_num_workers: 0
+  # Rows in the random grid and in each group's high/low CLIPScore grid.
+  comparison_samples: 8

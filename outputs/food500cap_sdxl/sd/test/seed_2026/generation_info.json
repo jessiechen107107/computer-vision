@@ -1,0 +1,60 @@
+{
+  "signature_sha256": "fca7ae3db1890dc5bc3f8eab9f366f6eb41d2f2dfcddcb725a326433b8c5134d",
+  "group": "sd",
+  "seed": 2026,
+  "protocol": {
+    "version": "food500cap-generation-v1",
+    "model": {
+      "repo_id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "requested_revision": "main",
+      "revision": "462165984030d82259a11f4367a4eed129e94a7b"
+    },
+    "dataset_revision": "1b2e0cb098ef3d58584f80bde015207c5a3d00c7",
+    "split": "test",
+    "manifest_sha256": "698645f166448f58ae150af20bf9b9b759c2efd52349aea1b5358f3c78f0a8dd",
+    "sample_ids_sha256": "2a7c4b9b9776678c1eb5345df67691cf113990ce8932e9ba42a7e28652a09087",
+    "captions_sha256": "6672eb22207b92235b298fbdddee051d763db07024a3943deb7b396019654968",
+    "generation": {
+      "height": 1024,
+      "width": 1024,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "steps": 30,
+      "guidance_scale": 5.0,
+      "negative_prompt": "",
+      "lora_scale": 1.0
+    },
+    "text": {
+      "long_caption_mode": "chunk",
+      "max_chunks": 4
+    },
+    "encoding_version": "sdxl-full-caption-chunks-v1",
+    "runtime": {
+      "device": "cuda",
+      "precision": "auto",
+      "local_files_only": false,
+      "allow_tf32": false
+    },
+    "resolved_runtime": {
+      "precision": "bf16",
+      "device_type": "cuda",
+      "gpu_name": "NVIDIA A16",
+      "torch_cuda": "13.2"
+    },
+    "implementation_versions": {
+      "torch": "2.15.0",
+      "diffusers": "0.43.0",
+      "transformers": "5.23.0",
+      "peft": "0.22.0",
+      "Pillow": "13.0.0",
+      "numpy": "2.5.5"
+    },
+    "source_sha256": {
+      "data.py": "0f36f7d82667c658ab74ee534bf6f541be812981c90f74a02745d79a9b75d7d1",
+      "sd.py": "718e6434e8e9ea900b63edb0821c1ac4ce2f5601f9aef247c49aa21d60142d15"
+    }
+  },
+  "adapter": null
+}

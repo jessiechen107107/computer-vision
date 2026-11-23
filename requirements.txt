@@ -1,0 +1,18 @@
+# Verified working stack: Python 3.12.3, CUDA 13.2, NVIDIA A16 (Linux).
+# Install PyTorch first, matched to your CUDA driver, then this file:
+#   pip install torch==2.15.0 torchvision==0.29.2
+#   pip install -r requirements.txt
+
+diffusers==0.43.0
+transformers==5.23.0
+peft==0.22.0
+accelerate==1.16.0
+safetensors
+huggingface_hub
+
+clean-fid==0.1.35
+numpy==2.5.5
+scipy==1.15.3
+Pillow==13.0.0
+pyarrow==26.0.1
+PyYAML

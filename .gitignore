@@ -1,0 +1,20 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Dataset and caches (re-create with: python data.py download)
+data/
+.cache/
+reports/
+
+# LoRA weights and optimizer state are too large for git
+outputs/**/checkpoints/
+
+# macOS
+.DS_Store
