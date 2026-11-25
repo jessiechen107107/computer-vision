@@ -596,6 +596,10 @@ def _validate(accelerator, config: dict, components: dict, unet, records: list[d
             validation_components = dict(components)
             validation_components["unet"] = current_unet
             pipe = build_pipeline(config, device=accelerator.device, components=validation_components)
+            # Accelerate's mixed-precision wrapper returns fp32 UNet outputs, so
+            # validation latents are fp32. SDXL upcasts an fp16 VAE for decoding
+            # but not a bf16 one; decode in fp32 here, as the fp16 path already does.
+            pipe.vae.to(dtype=torch.float32)
             pipe.set_adapters([ADAPTER_NAME], adapter_weights=[float(config["generation"]["lora_scale"])])
             rows = generate_images(
                 config, "sd_lora", split="val", adapter=adapter, records=records,

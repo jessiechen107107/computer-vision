@@ -147,16 +147,24 @@ ranking; the high/low grids are ranked by CLIPScore.
 
 ### Current status
 
-The `sd` group has finished on the full test split:
+Both groups have finished on the full test split:
 
 | Group | n | CLIPScore | FID |
 | --- | --- | --- | --- |
 | `sd` (original SDXL) | 4,938 | **33.07** | **25.45** |
-| `sd_lora` | - | not run yet | not run yet |
+| `sd_lora` (best checkpoint: step 2,000) | 4,938 | **33.24** | **21.31** |
 
-Only a few sample images are committed here; the full 4,938-image sets stay on
-the machine that generated them. LoRA checkpoints are not committed either (see
-`.gitignore`). The comparison report appears once the `sd_lora` group is scored.
+The two groups ran on different machines. `sd` used the stack in section 1.
+`sd_lora` used Python 3.11, PyTorch 2.8.0 (CUDA 12.8), diffusers 0.39.0 and
+transformers 4.57.6 on one NVIDIA A100. Each run's exact versions are in its
+`environment.json`.
+
+Only a few sample images are committed here, the same five test captions for
+both groups; the full 4,938-image sets stay on the machine that generated them.
+LoRA checkpoints are not committed either (see `.gitignore`). The automatic
+comparison report (`comparison/test/`) has not been generated: `sd.py` only
+pairs runs whose generation protocol matches exactly, including the GPU model
+and package versions, and these two runs differ.
 
 ## 5. Files
 

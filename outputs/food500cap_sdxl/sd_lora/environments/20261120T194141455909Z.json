@@ -1,0 +1,131 @@
+{
+  "python": "3.11.18",
+  "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+  "packages": {
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "diffusers": "0.39.0",
+    "transformers": "4.57.6",
+    "peft": "0.22.0",
+    "accelerate": "1.16.0",
+    "clean-fid": "0.1.35",
+    "Pillow": "13.0.0",
+    "pyarrow": "26.0.1"
+  },
+  "cuda": "12.8",
+  "gpus": [
+    "NVIDIA A100-PCIE-40GB"
+  ],
+  "source_sha256": {
+    "data.py": "0f36f7d82667c658ab74ee534bf6f541be812981c90f74a02745d79a9b75d7d1",
+    "sd.py": "718e6434e8e9ea900b63edb0821c1ac4ce2f5601f9aef247c49aa21d60142d15",
+    "sd_lora.py": "7aa19e05f56b3081184467c29d31a8ed47ce03d31cceac00e76f123fec74cf6b"
+  },
+  "config": {
+    "experiment": {
+      "name": "food500cap_sdxl",
+      "output_dir": "outputs/food500cap_sdxl",
+      "train_seed": 42
+    },
+    "paths": {
+      "raw": "data/raw/Food500Cap",
+      "processed": "data/processed",
+      "reports": "reports",
+      "cache": ".cache/foodgen"
+    },
+    "data": {
+      "repo_id": "advancedcv/Food500Cap",
+      "revision": "1b2e0cb098ef3d58584f80bde015207c5a3d00c7",
+      "validation_fraction": 0.1,
+      "split_seed": 42,
+      "row_group_cache": 2
+    },
+    "model": {
+      "family": "sdxl",
+      "id": "stabilityai/stable-diffusion-xl-base-1.0",
+      "revision": "main"
+    },
+    "text": {
+      "long_caption_mode": "chunk",
+      "max_chunks": 4
+    },
+    "runtime": {
+      "device": "cuda",
+      "precision": "auto",
+      "local_files_only": false,
+      "allow_tf32": false
+    },
+    "train": {
+      "resolution": 1024,
+      "lora_rank": 8,
+      "lora_alpha": 8,
+      "target_modules": [
+        "to_q",
+        "to_k",
+        "to_v",
+        "to_out.0"
+      ],
+      "batch_size_per_gpu": 1,
+      "gradient_accumulation_steps": 8,
+      "learning_rate": 0.0001,
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "adam_weight_decay": 0.01,
+      "adam_epsilon": 1e-08,
+      "max_grad_norm": 1.0,
+      "max_train_steps": 5000,
+      "warmup_steps": 250,
+      "lr_scheduler": "cosine",
+      "gradient_checkpointing": true,
+      "num_workers": 0,
+      "checkpoint_every_steps": 500,
+      "validate_every_steps": 1000,
+      "validation_samples": 512,
+      "validation_seed": 4242
+    },
+    "generation": {
+      "height": 1024,
+      "width": 1024,
+      "scheduler": "DPMSolverMultistepScheduler",
+      "algorithm_type": "dpmsolver++",
+      "solver_order": 2,
+      "use_karras_sigmas": true,
+      "steps": 30,
+      "guidance_scale": 5.0,
+      "negative_prompt": "",
+      "lora_scale": 1.0,
+      "seeds": [
+        2026
+      ]
+    },
+    "evaluation": {
+      "clip_model": "openai/clip-vit-base-patch32",
+      "clip_revision": "main",
+      "clip_batch_size": 16,
+      "clip_long_caption_policy": "truncate_and_report",
+      "fid_mode": "clean",
+      "fid_feature_model": "inception_v3",
+      "fid_batch_size": 16,
+      "fid_num_workers": 0,
+      "comparison_samples": 8
+    }
+  },
+  "extra": {
+    "training_signature": "50a9d5e77b87f1933f4b06747d9cb7c1d7573c0fb6111f16fe00542e148ef5d8",
+    "world_size": 1,
+    "batch_size_per_gpu": 1,
+    "gradient_accumulation_steps": 8,
+    "nominal_effective_batch_size": 8,
+    "prepared_batches_per_rank_per_epoch": 17774,
+    "final_accumulation_group_batches": 6,
+    "final_accumulation_group_effective_batch_size": 6,
+    "ddp_padding_note": "even_batches repeats initial training samples when needed to give all ranks equal batch counts",
+    "trainable_parameters": 11612160,
+    "frozen_vae_dtype": "float32",
+    "frozen_weight_dtype": "torch.bfloat16",
+    "trainable_dtype": "float32",
+    "precision": "bf16",
+    "prediction_type": "epsilon",
+    "resume_checkpoint": null
+  }
+}
